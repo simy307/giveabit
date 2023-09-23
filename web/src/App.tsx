@@ -1,11 +1,10 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from "@mui/material";
 
 import Loading from "./components/Loading";
 import Footer from "./components/Footer";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
-import ExternalApi from "./views/ExternalApi";
 import { Auth0Provider, Auth0ProviderOptions, useAuth0 } from '@auth0/auth0-react';
 
 // styles
