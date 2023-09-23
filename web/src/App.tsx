@@ -1,21 +1,21 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Container } from "@mui/material";
-
-import Loading from "./components/Loading";
-import Footer from "./components/Footer";
-import Home from "./views/Home";
-import Profile from "./views/Profile";
-import { Auth0Provider, Auth0ProviderOptions, useAuth0 } from '@auth0/auth0-react';
-
-// styles
+import { useNavigate } from 'react-router-dom';
+import { Auth0Provider, Auth0ProviderOptions } from '@auth0/auth0-react';
 import "./App.css";
-
-// fontawesome
-import initFontAwesome from "./utils/initFontAwesome";
 import { getConfig } from "./config";
-initFontAwesome();
+import GiveABitRoutes from './GiveABitRoutes.tsx';
+import { createTheme, ThemeProvider } from '@mui/material';
 
 const config = getConfig();
+const theme = createTheme({
+  palette: {
+    hack: {
+      main: '#4395EB',
+      light: '#4395EB',
+      dark: '#4395EB',
+      contrastText: '#FFF',
+    },
+  } as any,
+});
 
 const providerConfig: Auth0ProviderOptions = {
   domain: config.domain,
@@ -27,29 +27,7 @@ const providerConfig: Auth0ProviderOptions = {
   },
 };
 
-const GiveABitRoutes = () => {
-  const { isLoading, error } = useAuth0();
 
-  if (error) {
-    return <div>Oops... {error.message}</div>;
-  }
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  return (
-    <div id="app" className="d-flex flex-column h-100">
-      <Container className="flex-grow-1 mt-5">
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/profile" element={<Profile/>} />
-        </Routes>
-      </Container>
-      <Footer />
-    </div>
-  );
-}
 
 const App = () => {
   const navigate = useNavigate();
@@ -61,11 +39,13 @@ const App = () => {
   }
 
   return (
-    <Auth0Provider
-      {...providerConfig}
-    >
-      <GiveABitRoutes />
-    </Auth0Provider>
+    <ThemeProvider theme={theme}>
+      <Auth0Provider
+        {...providerConfig}
+      >
+        <GiveABitRoutes />
+      </Auth0Provider>
+    </ThemeProvider>
   );
 };
 

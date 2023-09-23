@@ -1,6 +1,5 @@
-import { Button, Container } from '@mui/material';
+import { Button, CircularProgress, Container } from '@mui/material';
 
-import Loading from "../components/Loading";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 export const ProfileComponent = () => {
@@ -19,5 +18,5 @@ export const ProfileComponent = () => {
 };
 
 export default withAuthenticationRequired(ProfileComponent, {
-  onRedirecting: () => <Loading />,
+  onRedirecting: () => <CircularProgress />,
 });
