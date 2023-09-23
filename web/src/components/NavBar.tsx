@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -49,8 +49,8 @@ const NavBar = () => {
                 <NavLink
                   tag={RouterNavLink}
                   to="/"
-                  exact
-                  activeClassName="router-link-exact-active"
+                  end
+                  className="router-link-exact-active"
                 >
                   Home
                 </NavLink>
@@ -60,8 +60,8 @@ const NavBar = () => {
                   <NavLink
                     tag={RouterNavLink}
                     to="/external-api"
-                    exact
-                    activeClassName="router-link-exact-active"
+                    end
+                    className="router-link-exact-active"
                   >
                     External API
                   </NavLink>
@@ -85,19 +85,18 @@ const NavBar = () => {
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret id="profileDropDown">
                     <img
-                      src={user.picture}
+                      src={user?.picture}
                       alt="Profile"
                       className="nav-user-profile rounded-circle"
                       width="50"
                     />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem header>{user.name}</DropdownItem>
+                    <DropdownItem header>{user?.name}</DropdownItem>
                     <DropdownItem
                       tag={RouterNavLink}
                       to="/profile"
-                      className="dropdown-profile"
-                      activeClassName="router-link-exact-active"
+                      className="dropdown-profile router-link-exact-active"
                     >
                       <FontAwesomeIcon icon="user" className="mr-3" /> Profile
                     </DropdownItem>
@@ -135,19 +134,19 @@ const NavBar = () => {
                 <NavItem>
                   <span className="user-info">
                     <img
-                      src={user.picture}
+                      src={user?.picture}
                       alt="Profile"
                       className="nav-user-profile d-inline-block rounded-circle mr-3"
                       width="50"
                     />
-                    <h6 className="d-inline-block">{user.name}</h6>
+                    <h6 className="d-inline-block">{user?.name}</h6>
                   </span>
                 </NavItem>
                 <NavItem>
                   <FontAwesomeIcon icon="user" className="mr-3" />
                   <RouterNavLink
                     to="/profile"
-                    activeClassName="router-link-exact-active"
+                    className="router-link-exact-active"
                   >
                     Profile
                   </RouterNavLink>
