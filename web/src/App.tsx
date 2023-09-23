@@ -1,9 +1,7 @@
-import React from "react";
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Container } from "reactstrap";
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Container } from "@mui/material";
 
 import Loading from "./components/Loading";
-import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
@@ -23,6 +21,7 @@ const config = getConfig();
 const providerConfig: Auth0ProviderOptions = {
   domain: config.domain,
   clientId: config.clientId,
+  cacheLocation: 'localstorage',
   authorizationParams: {
     redirect_uri: window.location.origin,
     ...(config.audience ? { audience: config.audience } : null),
@@ -42,12 +41,10 @@ const GiveABitRoutes = () => {
 
   return (
     <div id="app" className="d-flex flex-column h-100">
-      <NavBar />
       <Container className="flex-grow-1 mt-5">
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/external-api" element={<ExternalApi/>}/>
         </Routes>
       </Container>
       <Footer />
