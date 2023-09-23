@@ -1,20 +1,23 @@
 import express from 'express';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
+const client = new DynamoDBClient({});
+const docClient = DynamoDBDocumentClient.from(client);
 const app = express();
 const port = 3001;
 
-app.get('/profile', (req, res) => {
-    res.send({
-        first_name: 'John',
-        last_name: 'Whitman'
-    });
-});
 
-app.get('/profile', (req, res) => {
-    res.send({
-        email: 'simy307@gmail.com',
-        first_name: 'John',
-        last_name: 'Whitman'
+app.get('/profile/:email', async (req, res) => {
+    const command = new GetCommand({
+        TableName: "hackmidwest2023",
+        Key: {
+            hackmidwest2023: `profile-${req?.params?.email}`
+        }
     });
+
+    const response = await docClient.send(command);
+    console.log(response);
+    res.send(response.Item);
 });
 
 app.get('/payment_profile', (req, res) => {
