@@ -1,14 +1,13 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
 
-export const ProfileComponent = () => {
-
+export const FamilyStories = () => {
   return (
     <>
     </>
   );
 };
 
-export default withAuthenticationRequired(ProfileComponent, {
+export default withAuthenticationRequired(FamilyStories, {
   onRedirecting: LoadingSpinner,
 });

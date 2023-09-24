@@ -1,12 +1,14 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { CircularProgress } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Home from './views/Home.tsx';
 import Profile from './views/Profile.tsx';
 import LoadingSpinner from './components/LoadingSpinner.tsx';
+import { FamilyStories } from './views/FamilyStories.tsx';
+import HowItWorks from './views/HowItWorks.tsx';
+import Header from './components/Header.tsx';
 
 export default function GiveABitRoutes() {
-  const { isLoading, error } = useAuth0();
+  const { isLoading, error, isAuthenticated } = useAuth0();
 
   if (error) {
     return <div>Oops... {error.message}</div>;
@@ -17,9 +19,14 @@ export default function GiveABitRoutes() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Home/>} />
-      <Route path="/profile" element={<Profile/>} />
-    </Routes>
+    <>
+      {isAuthenticated && <Header/>}
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/family-stories" element={<FamilyStories/>} />
+        <Route path="/how-it-works" element={<HowItWorks/>} />
+      </Routes>
+    </>
   );
 }

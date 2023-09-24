@@ -2,6 +2,7 @@ import logo from '../assets/logo.svg';
 import styled from '@emotion/styled';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button, Tab, Tabs } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   background-color: #5AC4ED;
@@ -24,13 +25,19 @@ const LogoutButton = styled(Button)`
 
 export default function Header() {
   const { logout } = useAuth0();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location);
 
   return (
     <HeaderContainer>
       <img src={logo} alt="Give A Bit" />
       <TabsNavigation
-        value={"profile"}
-        onChange={() => null}
+        value={location.pathname.replace('/', '')}
+        onChange={(_event, value) => {
+          navigate(`/${value}`);
+        }}
         textColor="secondary"
         indicatorColor="secondary"
         color="secondary"
