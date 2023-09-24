@@ -2,3 +2,4 @@ node_modules
 web/build
 .vite
 .idea
+web/dist

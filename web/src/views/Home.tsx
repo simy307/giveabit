@@ -48,7 +48,7 @@ const FloaterContainerHeader = styled.div`
 `;
 
 const FloaterContainerBody = styled.div`
-  font-size: 16px;
+  font-size: 19px;
   color: #333;
 `;
 
@@ -72,7 +72,6 @@ const Home = () => {
     isCounting: true,
     end: 38561,
     duration: 2,
-    easing: 'linear',
     thousandsSeparator: ',',
   });
   const { value: moneyRaised } = useCountUp({
@@ -80,7 +79,6 @@ const Home = () => {
     start: 1619562 / 2,
     end: 1619562,
     duration: 2,
-    easing: 'linear',
     thousandsSeparator: ',',
   })
   const { isAuthenticated, loginWithRedirect } = useAuth0();

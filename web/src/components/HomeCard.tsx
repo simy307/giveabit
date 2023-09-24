@@ -15,17 +15,6 @@ const GridContainer = styled(Grid)`
   margin-bottom: 32px;
 `;
 
-const LeftCallOutBox = styled(Grid)`
-  font-size: 48px;
-  font-weight: bold;
-  background-color: #4FACEC;
-  padding: 57px 25px !important;
-  margin: 0;
-  color: #FFF;
-  align-items: center;
-  justify-content: center;
-`;
-
 const HomeCardContextBox = styled(Grid)`
   padding-left: 32px;
   display: flex;
@@ -41,24 +30,31 @@ const HomeCardHeader = styled.div`
   margin-bottom: 12px;
 `;
 
+const LeftCallOutBoxBase = styled(Grid)`
+  max-width: 312px !important;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+
 export default function HomeCard(props: HomeCardProps) {
-  const LeftCallOutBox = styled(Grid)`
+  const LeftCallOutBox = styled(LeftCallOutBoxBase)`
     font-size: ${props.leftCalloutFontSize ?? '48'}px;
     font-weight: bold;
     background-color: #4FACEC;
     padding: 57px ${props.leftCalloutPaddingLeft ?? 30}px !important;
     margin: 0;
     color: #FFF;
-    align-items: center;
-    justify-content: center;
   `;
 
   return (
     <GridContainer container>
       {props.leftComponent ? (
-        <Grid item xs={5}>
+        <LeftCallOutBoxBase item xs={5}>
           {props.leftComponent()}
-        </Grid>
+        </LeftCallOutBoxBase>
       ) : (
         <LeftCallOutBox item xs={5}>
           {props.leftCalloutText}
