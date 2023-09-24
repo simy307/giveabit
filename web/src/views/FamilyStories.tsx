@@ -6,6 +6,8 @@ import RequestCard from "../components/RequestCard";
 import * as react from "react";
 import useSWR from "swr";
 import axios from "axios";
+import heart from '../assets/heart.svg';
+
 
 const GridContainer = styled(Grid)`
   height: calc(100% - 144px);
@@ -41,6 +43,13 @@ const GridItemRight = styled(Grid)`
   padding: 48px !important;
   background-color: rgba(238,218,151, .1);
 `;
+const HelpThisPerson = styled.div`
+  margin-top: 32px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+`;
+
 const fetcher = url => axios.get('http://localhost:3001/requests').then(res => res.data)
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -115,6 +124,10 @@ export const FamilyStories = () => {
           </div>
           <div style={{fontWeight: 500, fontSize: '18px', color: '#444444', marginTop: '32px'}}>Our story:</div>
           <div style={{fontWeight: 400, fontSize: '18px', color: '#444444', marginTop: '20px'}}>{selectedItem.description}</div>
+            <HelpThisPerson>
+              <img src={heart} width={45}/>
+              Help this person
+            </HelpThisPerson>
           </>}
         </GridItemRight>
       </GridContainer>
