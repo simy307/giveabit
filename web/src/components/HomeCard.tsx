@@ -8,6 +8,7 @@ type HomeCardProps = {
   leftCalloutPaddingLeft?: string;
   leftCalloutText?: string;
   header: string;
+  headerIcon: any;
   summary: string;
 }
 
@@ -28,6 +29,12 @@ const HomeCardHeader = styled.div`
   font-weight: bold;
   color: #4395EB;
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  
+  > img {
+    margin-right: 11px;
+  }
 `;
 
 const LeftCallOutBoxBase = styled(Grid)`
@@ -62,7 +69,10 @@ export default function HomeCard(props: HomeCardProps) {
       )}
       <HomeCardContextBox item xs={6}>
         <div>
-          <HomeCardHeader>{props.header}</HomeCardHeader>
+          <HomeCardHeader>
+            <img src={props.headerIcon} height={24} width={24} />
+            {props.header}
+          </HomeCardHeader>
           <div>{props.summary}</div>
         </div>
       </HomeCardContextBox>

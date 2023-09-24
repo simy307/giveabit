@@ -4,9 +4,9 @@ import styled from "@emotion/styled";
 const Image = styled.img`
 `;
 const Container = styled.div`
-  width: calc(100% - 350px);
   height: calc(100% - 244px);
-  padding: 50px 0px 50px 50px;
+  padding: 50px 240px 50px 50px;
+  background-color: rgba(238,218,151, .1);
 `;
 export const HowItWorks = () => {
   return (

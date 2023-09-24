@@ -4,6 +4,9 @@ import { Button, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import backgroundImage from '../assets/penny-jar.svg';
 import logo from '../assets/logo.svg';
+import heart from '../assets/heart.svg';
+import money from '../assets/money.svg';
+import people from '../assets/people.svg';
 import HomeCard from '../components/HomeCard.tsx';
 import { useCountUp } from 'use-count-up'
 
@@ -107,9 +110,26 @@ const Home = () => {
         </FloatingContainer>
       </GridItemLeft>
       <GridItemRight item xs={7}>
-        <HomeCard leftCalloutFontSize="72" leftCalloutPaddingLeft="40" leftCalloutText={peopleHelped} header="People Helped" summary="Need has a face and a story. Your donations help real people get through real challenges. Learn their stories and the impact of your donation."/>
-        <HomeCard leftCalloutText={`$${moneyRaised}`} header="Money Raised" summary="Small donations add up to great things. Pool your spare change with others in your community to make a lasting impact."/>
-        <HomeCard leftComponent={LoginSection} header="Make a change" summary="Ready to make a difference? You can get signed up and start helping in just a few minutes."/>
+        <HomeCard
+          leftCalloutFontSize="72"
+          leftCalloutPaddingLeft="40"
+          leftCalloutText={peopleHelped}
+          header="People Helped"
+          headerIcon={people}
+          summary="Need has a face and a story. Your donations help real people get through real challenges. Learn their stories and the impact of your donation."
+        />
+        <HomeCard
+          leftCalloutText={`$${moneyRaised}`}
+          header="Money Raised"
+          headerIcon={money}
+          summary="Small donations add up to great things. Pool your spare change with others in your community to make a lasting impact."
+        />
+        <HomeCard
+          leftComponent={LoginSection}
+          header="Make a change"
+          headerIcon={heart}
+          summary="Ready to make a difference? You can get signed up and start helping in just a few minutes."
+        />
       </GridItemRight>
     </GridContainer>
   );
