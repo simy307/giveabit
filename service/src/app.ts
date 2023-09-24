@@ -120,16 +120,20 @@ app.delete('/category/:email', async (req, res) => {
             itemIndex = index;
         }
     })
-    const command = new UpdateCommand({
-        TableName: "hackmidwest2023",
-        Key: {
-            hackmidwest2023: `profile-${req?.params?.email}`,
-        },
-        'UpdateExpression' : `REMOVE subscriptions[${itemIndex}]`,
-    });
+    if(itemIndex !== undefined) {
+        const command = new UpdateCommand({
+            TableName: "hackmidwest2023",
+            Key: {
+                hackmidwest2023: `profile-${req?.params?.email}`,
+            },
+            'UpdateExpression': `REMOVE subscriptions[${itemIndex}]`,
+        });
 
-    const response = await docClient.send(command);
-    res.send(response);
+        const response = await docClient.send(command);
+        res.send(response);
+    } else {
+        res.sendStatus(200);
+    }
 });
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
