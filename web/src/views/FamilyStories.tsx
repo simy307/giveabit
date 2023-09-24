@@ -43,6 +43,12 @@ const GridItemRight = styled(Grid)`
   padding: 48px !important;
   background-color: rgba(238,218,151, .1);
 `;
+const CategorySelect = styled(Select)`
+  text-transform: capitalize;
+`;
+const CategoryMenuItem = styled(MenuItem)`
+  text-transform: capitalize;
+`;
 const HelpThisPerson = styled.div`
   margin-top: 32px;
   font-size: 16px;
@@ -50,13 +56,14 @@ const HelpThisPerson = styled.div`
   align-items: center;
 `;
 
-const fetcher = url => axios.get('http://localhost:3001/requests').then(res => res.data)
+const fetcher = url => axios.get(`http://localhost:3001${url}`).then(res => res.data)
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 export const FamilyStories = () => {
-  const { data, error, isLoading } = useSWR('/requests', fetcher)
-  console.log(data);
+  const { data, error, isLoading } = useSWR('/requests', fetcher);
+  const { data: categories } = useSWR('/categories', fetcher);
+  console.log(categories);
   const [selctedIndex, setSelectedIndex] = react.useState(0)
   let selectedItem;
   if(data && data[`list-food`]) {
@@ -70,19 +77,16 @@ export const FamilyStories = () => {
               <div style={{fontSize: '24px', width: '169px'}}>Pick a category.</div>
             <div >
             <FormControl fullWidth>
-            <Select
+            <CategorySelect
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={'food'}
                 style={{width: '175px', height: '35px', marginLeft: '10px'}}
             >
-              <MenuItem value={'food'}>Food</MenuItem>
-              <MenuItem value={'medical'}>Medical</MenuItem>
-              <MenuItem value={'rent'}>Rent</MenuItem>
-              <MenuItem value={'repair'}>Repair</MenuItem>
-              <MenuItem value={'transportation'}>Transportation</MenuItem>
-              <MenuItem value={'utility'}>Utility</MenuItem>
-            </Select>
+              {categories?.list?.map((category: string) =>
+                <CategoryMenuItem value={category}>{category}</CategoryMenuItem>
+              )}
+            </CategorySelect>
           </FormControl>
             </div></div>
             <div style={{color: '#4395EB', fontSize: '16px', cursor: 'pointer'}}>Edit my contribution categories</div>
