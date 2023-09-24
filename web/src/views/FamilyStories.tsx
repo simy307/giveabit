@@ -1,16 +1,12 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
-import { Navigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import {Button, Grid, FormControl, Item, Select, MenuItem, Card} from '@mui/material';
+import {Grid, FormControl, Select, MenuItem, Card} from '@mui/material';
 import styled from '@emotion/styled';
-import backgroundImage from '../assets/penny-jar.svg';
-import logo from '../assets/logo.svg';
-import HomeCard from '../components/HomeCard.tsx';
 import { useCountUp } from 'use-count-up'
 
 const GridContainer = styled(Grid)`
-  height: 100vh;
+  height: calc(100% - 144px);
   margin: 0;
 `;
 const GridItemLeft = styled(Grid)`
@@ -43,51 +39,6 @@ const GridItemRight = styled(Grid)`
   padding: 48px !important;
   background-color: rgba(238,218,151, .1);
 `;
-const PennyImage = styled.img`
-  width: 100%;
-  min-height: 500px;
-`;
-const Logo = styled.img`
-  position: absolute;
-`;
-const FloatingContainer = styled.div`
-  position: relative;
-  background-color: #FFF;
-  border: 1px solid #CCC;
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  padding: 36px;
-  top: -78px;
-  width: 325px;
-  margin-left: 43px;
-  box-shadow: 8px 8px 8px rgba(0,0,0, .25);
-`;
-const FloaterContainerHeader = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 16px;
-`;
-
-const FloaterContainerBody = styled.div`
-  font-size: 16px;
-  color: #333;
-`;
-
-const LoginSectionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 50px !important;
-`;
-
-const SignupButton = styled(Button)`
-  font-size: 24px;
-  margin-bottom: 25px;
-`;
-
-const AlreadyAUserText = styled.span`
-  padding-right: 20px;
-`
 
 export const FamilyStories = () => {
   const { value: peopleHelped } = useCountUp({
