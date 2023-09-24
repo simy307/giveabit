@@ -92,8 +92,8 @@ export const FamilyStories = () => {
             <div style={{color: '#4395EB', fontSize: '16px', cursor: 'pointer'}}>Edit my contribution categories</div>
           </TopContainer>
           <TopContainer2>
-            <div style={{fontSize: '18px'}}>42 people need help with rent. </div>
-            <div style={{fontSize: '14px', width: '169px', color: '#666666'}}>Read their stories.</div>
+            <div style={{fontSize: '18px'}}>{data?.[`list-food`]?.length} people need help with food. </div>
+            <div style={{fontSize: '14px', width: '169px', color: '#666666', marginTop: '4px', marginBottom: '24px'}}>Read their stories.</div>
           </TopContainer2>
           <Grid container spacing={4} marginTop={'8px'} paddingLeft={'35px'} paddingRight={'50px'}>
             {!isLoading && <>
