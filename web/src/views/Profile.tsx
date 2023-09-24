@@ -6,19 +6,20 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl, FormControlLabel, FormGroup,
   Grid, MenuItem, Select,
   Slide, Slider,
-  Transitions
 } from '@mui/material';
 import {makeStyles} from "@mui/styles";
 import * as React from "react";
 import {TransitionProps} from "@mui/material/transitions";
 import axios from "axios";
-import useSWR, {mutate, useSWRConfig} from "swr";
-import react from "@vitejs/plugin-react";
+import useSWR, {useSWRConfig} from "swr";
+import bread from '../assets/bread.svg';
+import maintenance from '../assets/maintenance.svg';
+import heater from '../assets/heater.svg';
+import door from '../assets/door.svg';
 
 const GridContainer = styled(Grid)`
   height: calc(100vh - 144px);
@@ -61,10 +62,9 @@ const CategoryListItem = styled.li`
     margin-bottom: 0;
   }
 `;
-const CategoryListItemBullet = styled.div`
+const CategoryListItemBullet = styled.img`
   height: 30px;
   width: 30px;
-  background-color: #D9D9D9;
   margin-right: 12px;
 `;
 const CategoryListItemAmount = styled.strong`
@@ -223,22 +223,22 @@ export const ProfileComponent = () => {
         <AmountHelpedText>You have helped <strong>740</strong> families.</AmountHelpedText>
         <CategoryList>
           <CategoryListItem>
-            <CategoryListItemBullet/>
+            <CategoryListItemBullet src={bread}/>
             <CategoryListItemAmount>512</CategoryListItemAmount>
             <div>Put food on their table</div>
           </CategoryListItem>
           <CategoryListItem>
-            <CategoryListItemBullet/>
+            <CategoryListItemBullet src={maintenance}/>
             <CategoryListItemAmount>23</CategoryListItemAmount>
             <div>Repair their vehicle</div>
           </CategoryListItem>
           <CategoryListItem>
-            <CategoryListItemBullet/>
+            <CategoryListItemBullet src={heater}/>
             <CategoryListItemAmount>121</CategoryListItemAmount>
             <div>Ensure their kids stay warm</div>
           </CategoryListItem>
           <CategoryListItem>
-            <CategoryListItemBullet/>
+            <CategoryListItemBullet src={door}/>
             <CategoryListItemAmount>32</CategoryListItemAmount>
             <div>Keep a roof over their heads</div>
           </CategoryListItem>
