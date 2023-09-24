@@ -1,9 +1,11 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
-import { useAuth0 } from '@auth0/auth0-react';
-import {Grid, FormControl, Select, MenuItem, Card} from '@mui/material';
+import {Grid, FormControl, Select, MenuItem} from '@mui/material';
 import styled from '@emotion/styled';
-import { useCountUp } from 'use-count-up'
+import RequestCard from "../components/RequestCard";
+import * as react from "react";
+import useSWR from "swr";
+import axios from "axios";
 
 const GridContainer = styled(Grid)`
   height: calc(100% - 144px);
@@ -39,25 +41,18 @@ const GridItemRight = styled(Grid)`
   padding: 48px !important;
   background-color: rgba(238,218,151, .1);
 `;
-
+const fetcher = url => axios.get('http://localhost:3001/requests').then(res => res.data)
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 export const FamilyStories = () => {
-  const { value: peopleHelped } = useCountUp({
-    isCounting: true,
-    end: 38561,
-    duration: 2,
-    easing: 'linear',
-    thousandsSeparator: ',',
-  });
-  const { value: moneyRaised } = useCountUp({
-    isCounting: true,
-    start: 1619562 / 2,
-    end: 1619562,
-    duration: 2,
-    easing: 'linear',
-    thousandsSeparator: ',',
-  })
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
-
+  const { data, error, isLoading } = useSWR('/requests', fetcher)
+  console.log(data);
+  const [selctedIndex, setSelectedIndex] = react.useState(0)
+  let selectedItem;
+  if(data && data[`list-food`]) {
+    selectedItem = data[`list-food`][selctedIndex];
+  }
   return (
       <GridContainer container spacing={2}>
         <GridItemLeft item xs={7}>
@@ -88,78 +83,39 @@ export const FamilyStories = () => {
             <div style={{fontSize: '14px', width: '169px', color: '#666666'}}>Read their stories.</div>
           </TopContainer2>
           <Grid container spacing={4} marginTop={'8px'} paddingLeft={'35px'} paddingRight={'50px'}>
-
-            <Grid item xs={12}>
-              <Card style={{border: "2px solid #4395EB", alignItems: 'center', fontSize: '16px', height: '25px', display: 'flex', justifyContent: "space-between", padding: '15px 25px'}} elevation={3}>
-                <div>Jill B.</div>
-                <div>Austin, TX</div>
-                <div>Needs: $230</div>
-                <div>By: 10/31/23</div>
-                <div style={{paddingLeft: '150px'}}>Rent</div>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card style={{alignItems: 'center', fontSize: '16px', height: '25px', display: 'flex', justifyContent: "space-between", padding: '15px 25px'}} elevation={3}>
-                <div>Jill B.</div>
-                <div>Austin, TX</div>
-                <div>Needs: $230</div>
-                <div>By: 10/31/23</div>
-                <div style={{paddingLeft: '150px'}}>Rent</div>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card style={{alignItems: 'center', fontSize: '16px', height: '25px', display: 'flex', justifyContent: "space-between", padding: '15px 25px'}} elevation={3}>
-                <div>Jill B.</div>
-                <div>Austin, TX</div>
-                <div>Needs: $230</div>
-                <div>By: 10/31/23</div>
-                <div style={{paddingLeft: '150px'}}>Rent</div>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card style={{alignItems: 'center', fontSize: '16px', height: '25px', display: 'flex', justifyContent: "space-between", padding: '15px 25px'}} elevation={3}>
-                <div>Jill B.</div>
-                <div>Austin, TX</div>
-                <div>Needs: $230</div>
-                <div>By: 10/31/23</div>
-                <div style={{paddingLeft: '150px'}}>Rent</div>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card style={{alignItems: 'center', fontSize: '16px', height: '25px', display: 'flex', justifyContent: "space-between", padding: '15px 25px'}} elevation={3}>
-                <div>Jill B.</div>
-                <div>Austin, TX</div>
-                <div>Needs: $230</div>
-                <div>By: 10/31/23</div>
-                <div style={{paddingLeft: '150px'}}>Rent</div>
-              </Card>
-            </Grid>
-            <Grid item xs={12}>
-              <Card style={{alignItems: 'center', fontSize: '16px', height: '25px', display: 'flex', justifyContent: "space-between", padding: '15px 25px'}} elevation={3}>
-                <div>Jill B.</div>
-                <div>Austin, TX</div>
-                <div>Needs: $230</div>
-                <div>By: 10/31/23</div>
-                <div style={{paddingLeft: '150px'}}>Rent</div>
-              </Card>
-            </Grid>
-
+            {!isLoading && <>
+              {data[`list-food`].map((item, index)=> {
+                console.log(index)
+                return  <RequestCard
+                    onClick={() => setSelectedIndex(index)}
+                    isSelected={selctedIndex === index}
+                    name={item.name}
+                    type={capitalizeFirstLetter(item.type || 'NA')}
+                    amount={item.amount}
+                    by_date={item.by_date || 'NA'}
+                    city={item.city}
+                    state={item.state}>
+                </RequestCard>
+              })}
+            </>}
           </Grid>
         </GridItemLeft>
         <GridItemRight item xs={5}>
-          <div style={{fontWeight: 700, fontSize: '32px', color: '#4395EB'}}>Jill’s Story</div>
-          <div style={{fontWeight: 400, fontSize: '32px', color: '#444444', marginTop: '32px'}}>Jill B.</div>
-          <div style={{fontWeight: 400, fontSize: '18px', color: '#444444'}}>Austin, TX</div>
+          {!isLoading &&<>
+          <div style={{fontWeight: 700, fontSize: '32px', color: '#4395EB'}}>{selectedItem.name.split(' ')[0]}'s Story</div>
+          <div style={{fontWeight: 400, fontSize: '32px', color: '#444444', marginTop: '32px'}}>{selectedItem.name}</div>
+          <div style={{fontWeight: 400, fontSize: '18px', color: '#444444'}}>{selectedItem.city}, {selectedItem.state}</div>
           <div style={{ fontSize: '18px', color: '#444444', marginTop: '32px', display: "flex"}}>
             <div style={{fontWeight: 500}}>Needs:&nbsp;</div>
-            <div style={{fontWeight: 400}}>$230.0</div>
+            <div style={{fontWeight: 400}}>${selectedItem.amount}</div>
           </div>
           <div style={{ fontSize: '18px', color: '#444444', display: "flex"}}>
             <div style={{fontWeight: 500}}>By:&nbsp;</div>
-            <div style={{fontWeight: 400}}>10/31/23</div>
+            <div style={{fontWeight: 400}}>{selectedItem.by_date || 'NA'}</div>
           </div>
           <div style={{fontWeight: 500, fontSize: '18px', color: '#444444', marginTop: '32px'}}>Our story:</div>
-          <div style={{fontWeight: 400, fontSize: '18px', color: '#444444', marginTop: '20px'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce varius purus vitae velit consequat posuere. In finibus, orci sit amet maximus eleifend, ligula libero ullamcorper erat, sed semper ex nibh sit amet massa. Maecenas facilisis odio vitae elit malesuada iaculis. Fusce tellus libero, porta ut bibendum vel</div>
+          <div style={{fontWeight: 400, fontSize: '18px', color: '#444444', marginTop: '20px'}}>{selectedItem.description}</div>
+          </>}
         </GridItemRight>
       </GridContainer>
   );
