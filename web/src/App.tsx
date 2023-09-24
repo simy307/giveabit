@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { Auth0Provider, Auth0ProviderOptions } from '@auth0/auth0-react';
-import "./App.css";
 import { getConfig } from "./config";
 import GiveABitRoutes from './GiveABitRoutes.tsx';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -14,6 +13,9 @@ const theme = createTheme({
       dark: '#4395EB',
       contrastText: '#FFF',
     },
+    secondary: {
+      main: '#fff',
+    }
   } as any,
 });
 

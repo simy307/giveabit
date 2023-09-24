@@ -42,7 +42,6 @@ const HomeCardHeader = styled.div`
 `;
 
 export default function HomeCard(props: HomeCardProps) {
-
   const LeftCallOutBox = styled(Grid)`
     font-size: ${props.leftCalloutFontSize ?? '48'}px;
     font-weight: bold;

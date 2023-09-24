@@ -3,8 +3,9 @@ import { CircularProgress } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Home from './views/Home.tsx';
 import Profile from './views/Profile.tsx';
+import LoadingSpinner from './components/LoadingSpinner.tsx';
 
-export default function GiveABitRoutes () {
+export default function GiveABitRoutes() {
   const { isLoading, error } = useAuth0();
 
   if (error) {
@@ -12,7 +13,7 @@ export default function GiveABitRoutes () {
   }
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LoadingSpinner />;
   }
 
   return (

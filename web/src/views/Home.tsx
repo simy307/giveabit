@@ -38,6 +38,7 @@ const FloatingContainer = styled.div`
   top: -78px;
   width: 325px;
   margin-left: 43px;
+  box-shadow: 8px 8px 8px rgba(0,0,0, .25);
 `;
 const FloaterContainerHeader = styled.div`
   font-size: 24px;
