@@ -14,21 +14,20 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 ## Who's on your team?
 *List the full names,  email address & Github username of your teammates*
 
-1.   **Full Name**  || **fullname@company.com**  (or fullname@school.edu if you're a CS student) || **Github Username**
-2. 
-3.
-4.
-5.
+1. Kirby Simmons ksimmons@ryanrts.com
+2. Brian Simonson bsimonson@ryanrts.com
+3. James Rinell jrinell@ryanrts.com
+4. Sean Reel sreel@ryanrts.com
 
 <br /><br />
 
 
 ## What is the name of your App?
-
+Give A Bit
 <br /><br />
 ## What does your app do?
 *Describe in a paragraph or so*
-
+Crowdsource donations for everyday emergencies for those in need.
 <br /><br />
 
 
@@ -39,7 +38,7 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 - [ ]  Pinata ERC-6551 Challenge
 - [ ]  Okta Challenge
 - [ ]  GEHA Generative AI Emergency Response Challenge
-- [ ]  Corporate Challenge (only for official company teams)
+- [X]  Corporate Challenge (only for official company teams)
 - [ ]  College Challenge (only for teams of up to 5 CS students from the same school)
 
 <br /><br />
