@@ -110,6 +110,30 @@ export const FamilyStories = () => {
                     state={item.state}>
                 </RequestCard>
               })}
+              {data[`list-food`].map((item, index)=> {
+                console.log(index)
+                return  <RequestCard
+                    onClick={() => setSelectedIndex(index)}
+                    name={item.name}
+                    type={capitalizeFirstLetter(item.type || 'NA')}
+                    amount={item.amount}
+                    by_date={item.by_date || 'NA'}
+                    city={item.city}
+                    state={item.state}>
+                </RequestCard>
+              })}{data[`list-food`].map((item, index)=> {
+              console.log(index)
+              return  <RequestCard
+                  onClick={() => setSelectedIndex(index)}
+                  name={item.name}
+                  type={capitalizeFirstLetter(item.type || 'NA')}
+                  amount={item.amount}
+                  by_date={item.by_date || 'NA'}
+                  city={item.city}
+                  state={item.state}>
+              </RequestCard>
+            })}
+
             </>}
           </Grid>
         </GridItemLeft>
